@@ -5,278 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sam Vincent · Cybersecurity & Development</title>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg:         #0d1117;
-      --surface:    #161b22;
-      --surface2:   #21262d;
-      --border:     #30363d;
-      --text:       #e6edf3;
-      --muted:      #7d8590;
-      --accent:     #00d4aa;
-      --accent-dim: rgba(0,212,170,0.10);
-      --radius:     8px;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* NAV */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13,17,23,0.85);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 56px;
-    }
-    .nav-brand {
-      font-family: 'Share Tech Mono', monospace;
-      color: var(--accent);
-      font-size: 1rem;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--muted);
-      transition: color 0.15s;
-    }
-    .nav-links a:hover { color: var(--text); text-decoration: none; }
-
-    /* SECTIONS */
-    section {
-      padding: 80px 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .section-label {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      color: var(--text);
-    }
-
-    /* HERO */
-    #hero {
-      min-height: calc(100vh - 56px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-    .hero-tag {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.1s forwards;
-    }
-    .hero-name {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 600;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.25s forwards;
-    }
-    .hero-name span { color: var(--accent); }
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.4s forwards;
-    }
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.55s forwards;
-    }
-    .btn-primary {
-      padding: 0.65rem 1.5rem;
-      background: var(--accent);
-      color: #0d1117;
-      font-weight: 600;
-      font-size: 0.9rem;
-      border-radius: var(--radius);
-      transition: opacity 0.15s;
-    }
-    .btn-primary:hover { opacity: 0.85; text-decoration: none; }
-    .btn-secondary {
-      padding: 0.65rem 1.5rem;
-      background: transparent;
-      color: var(--text);
-      font-weight: 500;
-      font-size: 0.9rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      transition: border-color 0.15s;
-    }
-    .btn-secondary:hover { border-color: var(--accent); text-decoration: none; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: none; }
-    }
-
-    /* ABOUT */
-    #about { border-top: 1px solid var(--border); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    .about-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-    }
-    .about-card h3 {
-      font-family: 'Share Tech Mono', monospace;
-      color: var(--accent);
-      font-size: 0.9rem;
-      margin-bottom: 0.75rem;
-    }
-    .about-card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .about-card p + p { margin-top: 0.75rem; }
-
-    /* PROJECTS */
-    #projects { border-top: 1px solid var(--border); }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.25rem;
-    }
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      transition: border-color 0.15s, transform 0.15s;
-      display: flex;
-      flex-direction: column;
-    }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .project-tag {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--accent);
-      background: var(--accent-dim);
-      border: 1px solid var(--accent);
-      border-radius: 999px;
-      padding: 2px 10px;
-      display: inline-block;
-      margin-bottom: 0.75rem;
-      width: fit-content;
-    }
-    .project-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
-    .project-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; flex: 1; }
-    .project-links { display: flex; gap: 1rem; margin-top: 1.25rem; }
-    .project-links a { font-size: 0.8rem; font-weight: 500; }
-
-    /* SKILLS */
-    #skills { border-top: 1px solid var(--border); }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .skill-group {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-    }
-    .skill-group h3 {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-    .skill-group ul { list-style: none; }
-    .skill-group li {
-      font-size: 0.85rem;
-      color: var(--muted);
-      padding: 0.2rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .skill-group li:last-child { border-bottom: none; }
-
-    /* CONTACT */
-    #contact { border-top: 1px solid var(--border); }
-    .contact-intro {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 480px;
-      margin-bottom: 2rem;
-      line-height: 1.7;
-    }
-    .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 0.65rem 1.25rem;
-      font-size: 0.88rem;
-      font-weight: 500;
-      color: var(--text);
-      transition: border-color 0.15s, color 0.15s;
-    }
-    .contact-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1.5rem 2rem;
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-family: 'Share Tech Mono', monospace;
-    }
-
-    @media (max-width: 640px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.ico" sizes="any">
 </head>
 <body>
 
@@ -312,7 +42,9 @@
       </div>
       <div class="about-card">
         <h3>What drives me</h3>
-        <p>As a dad of two, making the digital world safer isn't just a career goal; it's personal. Phishing, social engineering, and everyday cyber threats affect real people, and I want to build things that help.</p>
+        <p>As a dad of two, making the digital world safer isn't just a career goal; it's personal. Phishing, social engineering, and everyday cyber threats affect real people, and I want to build things that help.</        git add index.html styles.css script.js README.md favicon.ico
+        git commit -m "refactor: split CSS/JS files and add favicon link"
+        git push origin mainp>
         <p>I'm passionate about education as much as technology; breaking down complex security concepts so that anyone, regardless of technical background, can protect themselves online. That's the thread that runs through everything I build.</p>
         <p>Student Rep and Treasurer of the Computer Society at the University of Plymouth.</p>
       </div>
@@ -417,7 +149,7 @@
     <h2>Get in touch</h2>
     <p class="contact-intro">Whether you want to talk cybersecurity, collaborate on a project, or just connect; feel free to reach out.</p>
     <div class="contact-links">
-      <a href="https://www.linkedin.com/in/sam-vincent-730ab6387/" target="_blank" class="contact-link">
+      <a href="https://www.linkedin.com/in/sam-vincent148/" target="_blank" class="contact-link">
         <span>LinkedIn</span>
       </a>
       <a href="https://github.com/thespiderchef" target="_blank" class="contact-link">
@@ -427,8 +159,10 @@
   </section>
 
   <footer>
-    <p>© 2025 Sam Vincent · samvincent.dev · Built with HTML, CSS & JS</p>
+    <p>© 2025 Sam Vincent · samvincent.me · Built with HTML, CSS & JS</p>
   </footer>
+
+  <script src="script.js" defer></script>
 
 </body>
 </html>
